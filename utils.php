@@ -44,4 +44,19 @@ date_default_timezone_set('America/Sao_Paulo');
 		$interval = $hoje->diff($data);
 		return $interval->format('%R%a');
 	}
+
+	//Snippet para geração de excel à partir de uma tabela
+	function gera_excel(){
+		$html_tabela = '<table><tr><td>Célula</td></tr></table>';
+		$arquivo = 'planilha.xls';
+		header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+		header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+		header ("Cache-Control: no-cache, must-revalidate");
+		header ("Pragma: no-cache");
+		header ("Content-type: application/x-msexcel");
+		header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+		header ("Content-Description: PHP Generated Data" );
+		// Envia o conteúdo do arquivo
+		echo $html_tabela;
+	}
 ?>
