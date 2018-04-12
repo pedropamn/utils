@@ -59,4 +59,10 @@ date_default_timezone_set('America/Sao_Paulo');
 		// Envia o conteúdo do arquivo
 		echo $html_tabela;
 	}
+	
+	//Snippet que inicia uma sessão. Deve ser usado em todas as páginas protegidas e na página que verifica o login
+	function inicia_sessao(){
+		if(!isset($_SESSION)){session_start();}
+		//$_SESSION['logado'] = true;
+	}
 ?>
