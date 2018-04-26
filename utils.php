@@ -65,4 +65,9 @@ date_default_timezone_set('America/Sao_Paulo');
 		if(!isset($_SESSION)){session_start();}
 		//$_SESSION['logado'] = true;
 	}
+
+	//Obtém um áudio, via TTS do Google tradutor
+	function tts($txt,$lang){
+		$tts = file_get_contents("https://translate.google.com/translate_tts?ie=UTF-8&q=".$txt."?&tl=".$lang."&client=tw-ob");
+	}
 ?>
