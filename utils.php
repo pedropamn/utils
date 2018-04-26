@@ -45,9 +45,8 @@ date_default_timezone_set('America/Sao_Paulo');
 		return $interval->format('%R%a');
 	}
 
-	//Snippet para geração de excel à partir de uma tabela
-	function gera_excel(){
-		$html_tabela = '<table><tr><td>Célula</td></tr></table>';
+	//Snippet para geração de excel à partir de uma tabela em HTML
+	function gera_excel($html_tabela){
 		$arquivo = 'planilha.xls';
 		header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
