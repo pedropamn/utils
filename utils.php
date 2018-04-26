@@ -65,7 +65,7 @@ date_default_timezone_set('America/Sao_Paulo');
 		//$_SESSION['logado'] = true;
 	}
 
-	//Obtém um áudio, via TTS do Google tradutor
+	//Obtém um áudio, via TTS do Google tradutor (https://stackoverflow.com/questions/9893175/google-text-to-speech-api/)
 	function tts($txt,$lang){
 		$tts = file_get_contents("https://translate.google.com/translate_tts?ie=UTF-8&q=".$txt."?&tl=".$lang."&client=tw-ob");
 	}
