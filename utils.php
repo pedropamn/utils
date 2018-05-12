@@ -78,4 +78,24 @@ date_default_timezone_set('America/Sao_Paulo');
 		header("Content-Type: audio/mpeg");
 		$tts = file_get_contents("https://translate.google.com/translate_tts?ie=UTF-8&q=".$txt."?&tl=".$lang."&client=tw-ob");
 	}
+
+      //Gerencia um upload com validação de extensão e MIME (Testado com Dropzone.js)
+      function get_upload($uploaddir){
+      	$uploaddir = './pdf/';
+	$uploadfile = $uploaddir . basename($_FILES['fileToUpload']['name']);
+
+	//Checa a extensão e MIME
+	$filename = $_FILES['fileToUpload']['name'];
+	$ext = pathinfo($filename, PATHINFO_EXTENSION);
+	$mime = mime_content_type($_FILES['fileToUpload']['tmp_name']);
+	
+	  if($mime != 'application/pdf' || $ext != 'pdf'){
+		die('Erro. A extensão é '.$ext.' e o MIME é '.$mime);
+	  }
+	  if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile)) {
+		  echo "O arquivo é valido e foi carregado com sucesso.\n";
+	   } else {
+		 echo "Algo está errado aqui!\n";
+	   }
+      }
 ?>
