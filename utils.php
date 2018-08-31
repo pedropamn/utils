@@ -11,7 +11,62 @@ date_default_timezone_set('America/Sao_Paulo');
 		$conn = new mysqli($host, $user, $pass, $db);
 		mysqli_set_charset($conn,"utf8");
 		return $conn;
+		
+		/* Chamada:
+		$conn = get_conn();
+		if ($conn->connect_error) {
+			//die("Erro ao conectar ao banco: " . $conn->connect_error);
+			header("Location: index.php?msg=".lang('GENERAL_DATABASE_ERROR', $username)."&tipo=erro");
+		}
+		*/
 	}
+
+	//SELECT com Prepared Statements
+	function select($sql){
+		$conn = get_conn();	
+		//Check connection
+		if ($conn->connect_error) {
+			//die("Erro ao conectar ao banco: " . $conn->connect_error);
+			header('Location: index.php?status=errobanco');
+		}
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param('s',$var);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		while ($row = $result->fetch_assoc()) {
+			//Iteração
+		}
+	}
+
+	//INSERT com Prepared Statements. Ex:INSERT INTO tabela (coluna) VALUES (?)"); 
+	function insert($sql){
+		$conn = get_conn();	
+		//Check connection
+		if ($conn->connect_error) {
+			//die("Erro ao conectar ao banco: " . $conn->connect_error);
+			header('Location: index.php?status=errobanco');
+		}
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $var);
+		$stmt->execute();
+		if($stmt->affected_rows == 1){
+			//ok
+		}
+	}
+	//UPDATE com Prepared Statements. Ex:"UPDATE tabela SET coluna = ? WHERE coluna = ?"); 
+	function update($sql){
+		$conn = get_conn();
+	
+		//Check connection
+		if ($conn->connect_error) {
+			//die("Erro ao conectar ao banco: " . $conn->connect_error);
+			header('Location: index.php?status=errobanco');
+		}
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $var1,$var2);
+		$stmt->execute();		
+	}
+
 	
 	//Data para o dd/mm/aaaa 
 	function formata_data($data){
@@ -98,4 +153,6 @@ date_default_timezone_set('America/Sao_Paulo');
 		 echo "Algo está errado aqui!\n";
 	   }
       }
+
+	
 ?>
