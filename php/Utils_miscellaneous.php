@@ -28,6 +28,14 @@ function tts($txt,$lang){
 	$tts = file_get_contents("https://translate.google.com/translate_tts?ie=UTF-8&q=".$txt."?&tl=".$lang."&client=tw-ob");
 }
 
+//Traduçao usando Google Tradutor
+function translate_en_pt($txt){
+	$txt = urlencode($txt);
+	$con = file_get_contents("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q={$txt}");
+	$arr = json_decode($con,true);
+	return $arr[0][0][0];
+}
+
 //Evita cache
 function no_cache(){
 	header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
