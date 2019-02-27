@@ -11,8 +11,8 @@ function get_conn(){
 		return $conn;
 }
 
-//SELECT com Prepared Statements
-function select($sql){
+//SELECT em todas as colunas com Prepared Statements  (SELECT * FROM tabela WHERE coluna = ?)
+function select_multi_column($sql){
 	$conn = get_conn();	
 	//Check connection
 	if ($conn->connect_error) {
@@ -27,6 +27,26 @@ function select($sql){
 	while ($row = $result->fetch_assoc()) {
 		//Iteração
 	}
+	
+}
+
+//SELECT em coluna específica com Prepared Statements (SELECT coluna FROM tabela WHERE coluna = ?)
+function select_specific_column($sql){
+	$conn = get_conn();	
+	//Check connection
+	if ($conn->connect_error) {
+		//die("Erro ao conectar ao banco: " . $conn->connect_error);
+		header('Location: index.php?status=errobanco');
+	}
+	$stmt = $conn->prepare($sql);
+	$stmt->bind_param("i",$var); 
+	$stmt->execute();
+	$stmt->store_result();	
+	$num_de_resultados = $stmt->num_rows;
+	//Pega o resultado
+	$stmt->bind_result($nome_coluna); //$nome_coluna retornará o valor do SELECT
+	$stmt->fetch();
+	
 }
 
 //INSERT com Prepared Statements. Ex:INSERT INTO tabela (coluna) VALUES (?)"); 
@@ -40,13 +60,13 @@ function insert($sql){
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param("s", $var);
 	$stmt->execute();
-	if($stmt->affected_rows == 1){
+	if($stmt->affected_rows > 0){
 		//ok
 	}
 }
 
 
-//UPDATE com Prepared Statements. Ex:"UPDATE tabela SET coluna = ? WHERE coluna = ?"); 
+//UPDATE com Prepared Statements. Ex:"UPDATE tabela SET coluna_a = ?, coluna_b = ? WHERE coluna = ?"); 
 function update($sql){
 	$conn = get_conn();
 
@@ -56,7 +76,8 @@ function update($sql){
 		header('Location: index.php?status=errobanco');
 	}
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("s", $var1,$var2);
-	$stmt->execute();		
+	$stmt->bind_param("sss", $var1,$var2,$var3);
+	$stmt->execute();
+	$num_de_resultados = $stmt->affected_rows;
 }
 ?>
