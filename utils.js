@@ -1,4 +1,4 @@
-//Buscar qualquer informação em uma tabela. Insira onkeyup="Busca()" no campo de input.
+//Buscar qualquer informaÃ§Ã£o em uma tabela. Insira onkeyup="Busca()" no campo de input.
 function Busca() {
   // Declare variables 
   var input, filter, table, tr, td, i;
@@ -24,3 +24,15 @@ function Busca() {
 
   }
 }
+
+
+//Ajax via Jquery
+ $.ajax({
+	url: url,
+	success: function(result){
+		
+	},
+	error: function(){
+		
+	}
+});
