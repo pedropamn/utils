@@ -29,6 +29,8 @@ function Busca() {
 //Ajax via Jquery
  $.ajax({
 	url: url,
+        type: 'GET', 
+	//dataType: 'json',
 	success: function(result){
 		
 	},
