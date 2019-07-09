@@ -1,0 +1,73 @@
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+<script src='jquery.mask.js'></script>
+<style>
+th,td{
+	text-align:center;
+}
+</style>
+
+	<div class="view">
+		<table class="table">
+      <thead>
+        <tr>
+          <th>UF</th>
+          <th>Mês/Ano</th>
+          <th>CNPJ</th>
+          <th>Empresa</th>
+          <th>Modelo</th>
+          <th>Série</th>
+          <th>Nº da NF</th>
+          <th>Cod da NF</th>
+          <th>Dígito Verificador</th>
+        </tr>
+      </thead>
+      <tbody>
+      	<tr>
+          <td class="uf"></td>
+          <td class="mes_ano"></td>
+          <td class="cnpj"></td>
+          <td class="empresa"></td>
+          <td class="modelo"></td>
+          <td class="serie"></td>
+          <td class="num_nf"></td>
+          <td class="cod_nf"></td>
+          <td class="dv"></td>
+        </tr>
+        
+      </tbody>
+    </table>
+	</div>
+
+		<script>
+
+function chave_acesso(chave){
+	var uf = chave.substr(0,2);
+    var ano_mes_temp = chave.substr(2,4);	
+    var mes_ano = ano_mes_temp.substr(2,3) + '/' + ano_mes_temp.substr(0,2);
+    var cnpj = chave.substr(6,14);
+    var modelo = chave.substr(20,2);
+    var serie = chave.substr(22,3);
+    var num_nf = chave.substr(25,9);
+    var cod_nf = chave.substr(34,9);
+    var dv = chave.substr(43,1);
+
+	$('.uf').html(uf);
+	$('.mes_ano').html(mes_ano);
+	$('.cnpj').html(cnpj);
+	$('.modelo').html(modelo);
+	$('.serie').html(serie);
+	$('.num_nf').html(num_nf);
+	$('.cod_nf').html(cod_nf);
+	$('.dv').html(dv);
+	
+	 
+}
+
+chave_acesso('35190702290277002337550050001122691112692806');
+$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+
+
+</script>
