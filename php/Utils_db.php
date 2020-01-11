@@ -22,7 +22,7 @@ function select_multi_column($sql){
 	$stmt = $conn->prepare($sql);
 	$stmt->bind_param('s',$var);
 	$stmt->execute();
-	$stmt->store_result();
+	//$stmt->store_result();
 	$result = $stmt->get_result();
 	while ($row = $result->fetch_assoc()) {
 		//Iteração
