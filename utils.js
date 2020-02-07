@@ -38,3 +38,7 @@ function Busca() {
 		
 	}
 });
+
+//Obter parâmetros GET
+var urlParams = new URLSearchParams(window.location.search);
+var test = urlParams.get('test'); //index.php?test=123
