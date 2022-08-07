@@ -56,4 +56,13 @@ function datediff(first, second) {
     return Math.round((second-first)/(1000*60*60*24));
 }
 
+//Usage:
 datediff(parseDate('01/01/2022'), parseDate('03/01/2022'));
+
+
+////ISO (2022-08-07T17:00:52.268Z) to dd/mm/aaaa
+function isotodate(isoformat){
+	var date = new Date(isoformat);
+
+	return date.toLocaleDateString('pt-BR'); 'dd/mm/aaaa'
+}
